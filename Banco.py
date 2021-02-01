@@ -1,6 +1,3 @@
-
-import numpy as np
-
 class Banco(object):
     count=0
     #Los atributos de cliente
@@ -14,8 +11,7 @@ class Banco(object):
      self.account_type = account_type
 
     def listToString(self):  
-     return self.name + "," + self.date + "," + self.curp + "," + self.address + "," + self.phone + "," + str(self.first_deposit) + "," + self.account_type + "\n"
-    #def Validar(self, v):     
+     return self.name + "," + self.date + "," + self.curp + "," + self.address + "," + self.phone + "," + str(self.first_deposit) + "," + self.account_type  
 
 class Menu(): 
     num=0
@@ -23,10 +19,26 @@ class Menu():
     listaclientes = []
 
     def  __init__(self):
+     #Se crea un archivo por si no existe para que no salte error
+     archivocliente = open("Archivo.txt", "a")
+     archivocliente.close()
+     #Para añadir en arreglo
      archivocliente = open("Archivo.txt", "r") 
      for j in archivocliente:
-       listaclientes.append(j)
+       nueva = j.split(",")
+       print(nueva)
+       print("\n")
+       #anco(nueva[0],nueva[1],nueva[2],nueva[3],nueva[4],int(nueva[5]),nueva[6])
+     print("\n")  
+
+     print(nueva[4])
+
+     print(listaclientes)
+
      archivocliente.close()
+     #listaclientes.append(Banco)
+     print(listaclientes)
+
     def NewAccount(self):
      nombre = input("Ingrese el nombre del cliente: ")
      date = input("Ingrese la fecha de nacimiento dd/mm/yyyy: ")
@@ -145,20 +157,6 @@ class Menu():
        for j in listaclientes:
         archivocliente.write(j.listToString())
        archivocliente.close()
-       '''
-       print("Gracias por usar el programa")
-       archivocliente = open("Archivo.txt", "a")
-       for linea in listaclientes:
-        archivocliente.write(str(linea))
-
-       archivocliente.close()
-       
-       archivocliente = open("Archivo.txt", "w")
-       archivocliente.close()
-       archivocliente = open("Archivo.txt", "r+")
-       archivocliente.write(Menu.listToString(self,listaclientes))
-       archivocliente.close()
-       '''
 
        exit   
       elif op != 1 or op != 2 or op != 3 or op != 4 or op != 5 or op != 6 or op != 7:
@@ -166,7 +164,6 @@ class Menu():
  
 
 #Termina clase
-
 MenuBanco=Menu()
 MenuBanco.menuprincipal()
 
